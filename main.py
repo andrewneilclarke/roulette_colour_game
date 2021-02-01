@@ -19,7 +19,7 @@ resulting_number = None
 #welcome user
 def intro():
     global bank
-    print('Welcome to Roulette! \n')
+    print('Welcome to Roulette!! \n')
     time.sleep(0.5)
     bank = int(input('Enter starting bankroll: '))
 
