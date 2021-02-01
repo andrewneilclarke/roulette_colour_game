@@ -5,10 +5,21 @@ class Roulette():
 				(2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35): 'Black',
 				0: 'Green',
 				}
-	def __init__(self, roll):
+	def __init__(self, roll, numbers):
 		self.roll = random.randint(0, 36)
+		self.numbers = numbers
+		return self.roll
+		print(str(self.roll))
 
-#print(Roulette.numbers)
+	def display_roll():
+		print('hi')
+		print(roll)
+
+roll1 = Roulette.display_roll()
+
+print(roll1)
+#print(Roulette.roll)
+#print(Roulette.numbers.keys(roll))
 	#for k, v in numbers.items():
 	#	print(self.roll)	
 	
@@ -37,7 +48,7 @@ def check_colour():
 		numbers[2] 
 	return numbers[0, 1, 2]
 
-roll()
+#roll()
 
 
 #print(Roulette.check_odd_even(13))
