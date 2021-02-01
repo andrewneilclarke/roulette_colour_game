@@ -10,21 +10,21 @@ class Roulette():
 		self.result = result
 		
 
-		def rollball(self):
-			result = random.randint(0, 35)
+	def rollball():
+		result = random.randint(0, 35)
 
 		return result
 
-		def check_colour(self):
-			if result in numbers[0]:
-				numbers[0] = True
-			elif result in numbers[1]:
-				numbers[1] = True
-			else:
-				numbers[2] 
+	def check_colour():
+		if result in numbers[0]:
+			numbers[0] = True
+		elif result in numbers[1]:
+			numbers[1] = True
+		else:
+			numbers[2] 
 		return numbers[0, 1, 2]
-
-	print(Roulette.check_colour(1))
+	rollball()
+print(Roulette.check_colour())
 
 result = random.randint(0, 35)
 Draw = Roulette(1)
