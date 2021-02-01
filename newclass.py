@@ -9,11 +9,20 @@ class Roulette():
 
 		self.result = result
 		
-
 	def rollball():
 		result = random.randint(0, 35)
 
 		return result
+	
+	def check_odd_even(result):
+		""" check if the result was odd or even and return the result """
+		odd = False
+		even = False
+		if result % 2 == 0:
+			even = True
+		else:
+			odd = True
+		return odd, even
 
 	def check_colour():
 		if result in numbers[0]:
@@ -24,8 +33,8 @@ class Roulette():
 			numbers[2] 
 		return numbers[0, 1, 2]
 	rollball()
-print(Roulette.check_colour())
 
-result = random.randint(0, 35)
-Draw = Roulette(1)
-print(Draw.result)
+print(Roulette.check_odd_even(14))
+#print(Roulette.check_colour())
+#Draw = Roulette(9)
+#print(Roulette.rollball(result))
