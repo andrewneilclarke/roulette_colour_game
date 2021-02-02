@@ -8,12 +8,18 @@ wheel = {'Red':[1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 3
 
 class Roulette():
 	
-	def __init__(self, outcomes=37):
-		self.outcomes = outcomes	
-		
+	def __init__(self, result=None, odd=None, even=None, colour=None, firsttwelve=None, secondtwelve=None, thirdtwelve=None):
+		self.result = randint(0, 36)	
+		self.colour = colour
+		self.odd = odd
+		self.even = even
+		self.firsttwelve = firsttwelve
+		self.secondtwelve = secondtwelve
+		self.thirdtwelve = thirdtwelve
+
 	
 	def roll(self):
-	    return randint(0, self.outcomes-1)
+	    return randint(0, 36)
 	    
 
 	def store_results(self, results, spins):
@@ -26,10 +32,9 @@ class Roulette():
 		    results.append(result)
 		return results
 
-	def check_even_odd(self, result):
+	def check_even_odd(self):
 		#check if the result was odd or even and return the result
-		self.result = result
-		if result % 2 == 0:
+		if self.result % 2 == 0:
 			return True
 		else:
 			return False
@@ -37,11 +42,12 @@ class Roulette():
 	def check_colour(self, result):
 		self.result = result
 		if result in wheel['Red']:
-			return 'Red'
+			self.colour = 'Red'
 		elif result in wheel['Black']:
-			return 'Black'
+			self.colour = 'Black'
 		else:
-			return 'Green'
+			self.colour = 'Green'
+		return self.colour
 	
 	def check_twelve(self, result):
 		self.result = result
@@ -72,8 +78,16 @@ x = (R.roll())
 #print(R.store_results(x, 9))
 #print(R.check_even_odd(x))
 #print(R.check_red_black_green(x))
-print(R.check_twelve(x))
+#print(R.check_twelve(x))
 #print(R.check_colour(x))
+J = Roulette()
+print(J.result)
+print(J.check_even_odd())
+print(J.firsttwelve)
+
+#print(J.store_results(x, 9))
+
+
 """   
 # Analyze the results.
 frequencies = []
@@ -82,13 +96,13 @@ for value in range(1, die.num_sides+1):
     frequencies.append(frequency)
 """
 
-
+"""
 
 for c, l in wheel.items():
     for n in l:
         if n == x:
             print(c, n)
-
+"""
 
 #for k in numbers.keys():
 #	k.print(numbers[R.roll()])
