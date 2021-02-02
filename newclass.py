@@ -43,14 +43,23 @@ class Roulette():
 		else:
 			return 'Green'
 	
-	def check_first12(self, result):
+	def check_twelve(self, result):
 		self.result = result
 		if result > 0 < 13:
+			return 'First 12'
+		elif result > 12:
+			return 'Second 12'
+		else:
+			return 'Third 12'
+
+	def check_second12(self, result):
+		self.result = result
+		if result > 12 < 25:
 			return True
 		else:
 			return False
 
-	def check_second12(self, result):
+	def check_last12(self, result):
 		self.result = result
 		if result > 12 < 25:
 			return True
@@ -60,11 +69,11 @@ class Roulette():
 R = Roulette()
 x = (R.roll())
 
-print(R.store_results(x, 9))
+#print(R.store_results(x, 9))
 #print(R.check_even_odd(x))
 #print(R.check_red_black_green(x))
-#print(R.check_second12(x))
-print(R.check_colour(x))
+print(R.check_twelve(x))
+#print(R.check_colour(x))
 """   
 # Analyze the results.
 frequencies = []
