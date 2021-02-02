@@ -1,5 +1,6 @@
 from random import randint
 #import random integer function from random module
+
 wheel = {'Red':[1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36],
 				'Black':[2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35],
                 'Green':[0],
@@ -15,11 +16,12 @@ class Roulette():
 	    return randint(0, self.outcomes-1)
 	    
 
-	def store_results(self, results):
+	def store_results(self, results, spins):
 		# Make some rolls, and store the results in a list.
 		results = []
 		self.results = results
-		for x in range(15):
+		self.spins = spins
+		for x in range(spins):
 		    result = R.roll()	
 		    results.append(result)
 		return results
@@ -31,22 +33,38 @@ class Roulette():
 			return True
 		else:
 			return False
-	def check_red_black_green(self, result):
+
+	def check_colour(self, result):
 		self.result = result
-		for c, l in wheel.items():
-			for n in l:
-				if n == result:
-					return c
-		
+		if result in wheel['Red']:
+			return 'Red'
+		elif result in wheel['Black']:
+			return 'Black'
+		else:
+			return 'Green'
+	
+	def check_first12(self, result):
+		self.result = result
+		if result > 0 < 13:
+			return True
+		else:
+			return False
+
+	def check_second12(self, result):
+		self.result = result
+		if result > 12 < 25:
+			return True
+		else:
+			return False
 
 R = Roulette()
 x = (R.roll())
 
-#print(R.store_results(x))
+print(R.store_results(x, 9))
 #print(R.check_even_odd(x))
-print(R.check_red_black_green(x))
-
-
+#print(R.check_red_black_green(x))
+#print(R.check_second12(x))
+print(R.check_colour(x))
 """   
 # Analyze the results.
 frequencies = []
