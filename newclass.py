@@ -87,26 +87,17 @@ print(J.firsttwelve)
 
 #print(J.store_results(x, 9))
 
-
-"""   
-# Analyze the results.
-frequencies = []
-for value in range(1, die.num_sides+1):
-    frequency = results.count(value)
-    frequencies.append(frequency)
-"""
-
 """
 
 for c, l in wheel.items():
     for n in l:
         if n == x:
             print(c, n)
-"""
+
 
 #for k in numbers.keys():
 #	k.print(numbers[R.roll()])
-"""
+
 roll1 = Roulette.display_roll()
 
 print(roll1)
@@ -114,28 +105,4 @@ print(roll1)
 #print(Roulette.numbers.keys(roll))
 	#for k, v in numbers.items():
 	#	print(self.roll)	
-	
-
-
-
-
-def check_colour():
-	if result in numbers[0]:
-		numbers[0] = True
-	elif result in numbers[1]:
-		numbers[1] = True
-	else:
-		numbers[2] 
-	return numbers[0, 1, 2]
-
-#roll()
-
-
-#print(Roulette.check_odd_even(13))
-#print(Roulette.roll)
-#print(Roulette.numbers)
-#print(Roulette.result)
-#print(Roulette.check_colour())
-#Draw = Roulette(9)
-#print(Roulette.rollball(result))
-									"""
+	"""
