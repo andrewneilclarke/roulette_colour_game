@@ -125,5 +125,5 @@ while game_still_going:
     play_game()
     if broke == True:
         break
-    if input("Continue? (y/n)").strip().upper() != 'Y':
+    if input("Continue? (y/n)").strip().lower() != 'y':
         break
