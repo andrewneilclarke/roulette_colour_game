@@ -8,11 +8,9 @@ wheel = {'Red':[1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 3
 
 class Roulette():
 	
-	def __init__(self, result=None, odd=None, even=None, colour=None, firsttwelve=None, secondtwelve=None, thirdtwelve=None):
+	def __init__(self, result=None, colour=None, firsttwelve=None, secondtwelve=None, thirdtwelve=None):
 		self.result = randint(0, 36)	
 		self.colour = colour
-		self.odd = odd
-		self.even = even
 		self.firsttwelve = firsttwelve
 		self.secondtwelve = secondtwelve
 		self.thirdtwelve = thirdtwelve
@@ -32,7 +30,7 @@ class Roulette():
 		    results.append(result)
 		return results
 
-	def check_even_odd(self):
+	def is_even(self):
 		#check if the result was odd or even and return the result
 		if self.result % 2 == 0:
 			return True
@@ -82,8 +80,8 @@ x = (R.roll())
 #print(R.check_colour(x))
 J = Roulette()
 print(J.result)
-print(J.check_even_odd())
-print(J.firsttwelve)
+print(J.is_even())
+print(J.firsttwelve())
 
 #print(J.store_results(x, 9))
 
