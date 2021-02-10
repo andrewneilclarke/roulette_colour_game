@@ -12,12 +12,12 @@ red, black, green = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 
 
 class Roulette():
 	
-	def __init__(self, result=None):
-		self.result = randint(0, 36)	
-
-	def roll(self):
-	    return randint(0, 36)
-	    
+	def __init__(self, result):
+		self.result = result
+		
+	def get_number(self):
+		
+		randint(0, 36)
 
 	def store_results(self, results, spins):
 		# Make some rolls, and store the results in a list.
