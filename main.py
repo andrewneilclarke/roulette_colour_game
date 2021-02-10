@@ -1,20 +1,11 @@
 import random
 import time
+import roulette as r
 
-# assign roulette numbers to colours
-red, black, green = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36], [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35], [0]
-
-game_still_going = True
-broke = False
-colour_choice = ""
-roll_result = ""
-win_red = False
-win_green = False
-win_black = False
-lose = False
 bank = 0
+roll_result = 0
 betamount = 0
-resulting_number = None
+colour_choice = ""
 
 #welcome user
 def intro():
@@ -26,11 +17,20 @@ def intro():
 def display_table():
     print("Roulette Table")
     print("Red: ")
-    print(red)
+    print(r.red)
     print("Black:")
-    print(black)
+    print(r.black)
     print("Green:")
-    print(green)
+    print(r.green)
+
+
+def roll_ball():
+    global roll_result
+    roll_result = r.Roulette.roll(1)
+    print(roll_result)
+    #print(J.is_even())
+    #print(J.check_twelve())
+    #print(J.store_results(x, 5))
 
 def handle_turn():
     global colour_choice
@@ -53,21 +53,8 @@ def handle_turn():
     print("€" + str(betamount) + " on " + colour_choice)
     time.sleep(0.5)
 
-def roll_ball():
-    global roll_result
-    global resulting_number
-    #produce random spin
-    resulting_number = random.randint(0, 35)
-    #check which colour random number is and assign to colour as result
-    if resulting_number in red:
-        roll_result = "Red"
-    elif resulting_number in black:
-        roll_result = "Black"
-    elif resulting_number in green:
-        roll_result = "Green"
-    print(roll_result, resulting_number)
-
 def check_win():
+    #check win (FOR COLOUR!)
     global win_black
     global win_red
     global win_green
@@ -78,9 +65,10 @@ def check_win():
     win_black = False
     lose = False
     #check colour against result 
-    if colour_choice == "r" and roll_result == "Red":
+    if colour_choice == "r" and r.Roulette.assign_colour(roll_result) == "Red":
         win_red = True
         print("Red wins!")
+    """
     elif colour_choice == "b" and roll_result == "Black":
         win_black = True
         print("Black wins!")
@@ -90,6 +78,22 @@ def check_win():
     else:
         lose = True
         print("You lose! €" + str(betamount))
+"""
+
+intro()
+#display_table()
+#roll_ball()
+handle_turn()
+check_win()
+
+game_still_going = True
+broke = False
+win_red = False
+win_green = False
+win_black = False
+lose = False
+
+
     
 def check_if_broke():
     global broke
@@ -111,6 +115,7 @@ def increment_bank():
         bank = bank - betamount
     print(bank)
 
+"""
 def play_game():
     handle_turn()
     roll_ball()
@@ -127,3 +132,4 @@ while game_still_going:
         break
     if input("Continue? (y/n)").strip().upper() != 'Y':
         break
+"""
