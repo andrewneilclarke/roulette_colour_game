@@ -15,7 +15,6 @@ class Roulette():
 		self.secondtwelve = secondtwelve
 		self.thirdtwelve = thirdtwelve
 
-	
 	def roll(self):
 	    return randint(0, 36)
 	    
