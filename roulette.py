@@ -15,9 +15,9 @@ class Roulette():
 	def __init__(self, result):
 		self.result = result
 		
-	def get_number(self):
-		
-		randint(0, 36)
+	def get_number(self, result):
+		self.result = randint(0, 36)
+		return self.result
 
 	def store_results(self, results, spins):
 		# Make some rolls, and store the results in a list.

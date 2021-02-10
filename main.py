@@ -25,7 +25,8 @@ def display_table():
 
 
 def roll_ball():
-    print(r.Roulette())
+    print(r.Roulette.get_number())
+    #print(r.Roulette())
     #print(roll_result)
     #print(J.is_even())
     #print(J.check_twelve())
