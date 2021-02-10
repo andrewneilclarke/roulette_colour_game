@@ -52,6 +52,9 @@ def handle_turn():
     colour_choice = (input("Red(r), black(b), or green(g)? :"))
     print("€" + str(betamount) + " on " + colour_choice)
     time.sleep(0.5)
+    print(r.Roulette.is_even(x, 5))
+    #print(J.check_twelve())
+    #print(J.store_results(x, 5))
 
 def check_win():
     #check win (FOR COLOUR!)
@@ -65,7 +68,7 @@ def check_win():
     win_black = False
     lose = False
     #check colour against result 
-    if colour_choice == "r" and r.Roulette.assign_colour(roll_result) == "Red":
+    if colour_choice == "r" and roll_result == "Red":
         win_red = True
         print("Red wins!")
     """
@@ -81,10 +84,10 @@ def check_win():
 """
 
 intro()
-#display_table()
-#roll_ball()
+display_table()
+roll_ball()
 handle_turn()
-check_win()
+#check_win()
 
 game_still_going = True
 broke = False

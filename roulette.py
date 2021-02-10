@@ -5,19 +5,15 @@ from random import randint
 red, black, green = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36], [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35], [0]
 
 #assign wheel numbers to colours
-wheel = {'Red':[1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36],
-				'Black':[2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35],
-                'Green':[0],
-				}
+#wheel = {'Red':[1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36],
+#				'Black':[2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35],
+#                'Green':[0],
+#				}
 
 class Roulette():
 	
-	def __init__(self, result=None, colour=None, firsttwelve=None, secondtwelve=None, thirdtwelve=None):
+	def __init__(self, result=None):
 		self.result = randint(0, 36)	
-		self.colour = colour
-		self.firsttwelve = firsttwelve
-		self.secondtwelve = secondtwelve
-		self.thirdtwelve = thirdtwelve
 
 	def roll(self):
 	    return randint(0, 36)
@@ -33,7 +29,8 @@ class Roulette():
 		    results.append(result)
 		return results
 
-	def is_even(self):
+	def is_even(self, result):
+		self.result = result
 		#check if the result was odd or even and return the result
 		if self.result % 2 == 0:
 			return True
