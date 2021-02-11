@@ -1,5 +1,4 @@
 from random import randint
-#import random integer function from random module
 
 # assign roulette numbers to colours
 red, black, green = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36], [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35], [0]
@@ -11,14 +10,14 @@ red, black, green = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 
 #				}
 
 class Roulette():
-	
-	def __init__(self, result):
-		self.result = result
+	#represent the roulette wheel which has 37 outcomes
+	def __init__(self, numbers=37):
+		self.numbers = numbers
 		
-	def get_number(self, result):
-		self.result = randint(0, 36)
-		return self.result
+	def spin_wheel(self):
+		return randint(0, self.numbers)
 
+"""
 	def store_results(self, results, spins):
 		# Make some rolls, and store the results in a list.
 		results = []
@@ -55,7 +54,6 @@ class Roulette():
 		else:
 			return 'Third 12'
 
-"""
 R = Roulette()
 x = (R.roll())
 

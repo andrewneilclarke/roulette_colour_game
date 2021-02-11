@@ -1,11 +1,31 @@
 import random
 import time
-import roulette as r
+from roulette import Roulette as r
 
 bank = 0
 roll_result = 0
 betamount = 0
 colour_choice = ""
+
+
+#create instances
+spin1 = r()
+spin2 = r()
+spin3 = r()
+
+results = []
+for i in range(12):
+    print(r().spin_wheel())
+
+"""
+#store some results in a list
+results = [spin1.spin_wheel(), spin2.spin_wheel(), spin3.spin_wheel()]
+print(results[:])
+
+for spin_num in range(12):
+    result = spin1.spin_wheel() + spin2.spin_wheel() + spin3.spin_wheel()
+    results.append(result)
+print(results)
 
 #welcome user
 def intro():
@@ -25,7 +45,8 @@ def display_table():
 
 
 def roll_ball():
-    print(r.Roulette.get_number())
+    r.Roulette.get_number()
+    return result
     #print(r.Roulette())
     #print(roll_result)
     #print(J.is_even())
@@ -71,7 +92,7 @@ def check_win():
     if colour_choice == "r" and roll_result == "Red":
         win_red = True
         print("Red wins!")
-    """
+   
     elif colour_choice == "b" and roll_result == "Black":
         win_black = True
         print("Black wins!")
@@ -81,12 +102,12 @@ def check_win():
     else:
         lose = True
         print("You lose! €" + str(betamount))
-"""
 
-intro()
-display_table()
-roll_ball()
-handle_turn()
+
+#intro()
+#display_table()
+#roll_ball()
+#handle_turn()
 #check_win()
 
 game_still_going = True
@@ -118,7 +139,7 @@ def increment_bank():
         bank = bank - betamount
     print(bank)
 
-"""
+
 def play_game():
     handle_turn()
     roll_ball()
