@@ -7,12 +7,6 @@ result = 0
 betamount = 0
 colour_choice = ""
 
-
-#create instances
-spin1 = r()
-spin2 = r()
-spin3 = r()
-
 #welcome user
 def intro():
     global bank
@@ -88,13 +82,27 @@ for i in range(12):
     print(r().spin_wheel())
     print(check_win())
 """
-intro()
-display_table()
-take_bets()
-roll_ball()
-print(spin1.get_colour())
+#intro()
+#display_table()
+#take_bets()
+#roll_ball()
+#print(spin1.get_colour())
 #handle_turn()
 #check_win()
+
+#create instances
+r1 = r()
+r2 = r()
+r3 = r()
+
+print(r1.number)
+print(r1.colour)
+print(r1.is_even())
+print(r1.check_twelve())
+
+print(r2.number)
+print(r2.colour)
+print(r2.check_twelve())
 
 game_still_going = True
 broke = False
