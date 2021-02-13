@@ -3,7 +3,7 @@ import time
 from roulette import Roulette as r
 
 bank = 0
-roll_result = 0
+result = 0
 betamount = 0
 colour_choice = ""
 
@@ -12,20 +12,6 @@ colour_choice = ""
 spin1 = r()
 spin2 = r()
 spin3 = r()
-
-results = []
-for i in range(12):
-    print(r().spin_wheel())
-
-"""
-#store some results in a list
-results = [spin1.spin_wheel(), spin2.spin_wheel(), spin3.spin_wheel()]
-print(results[:])
-
-for spin_num in range(12):
-    result = spin1.spin_wheel() + spin2.spin_wheel() + spin3.spin_wheel()
-    results.append(result)
-print(results)
 
 #welcome user
 def intro():
@@ -43,17 +29,13 @@ def display_table():
     print("Green:")
     print(r.green)
 
-
 def roll_ball():
-    r.Roulette.get_number()
+    global result
+    result = (r().spin_wheel())
+    print(result)
     return result
-    #print(r.Roulette())
-    #print(roll_result)
-    #print(J.is_even())
-    #print(J.check_twelve())
-    #print(J.store_results(x, 5))
-
-def handle_turn():
+    
+def take_bets():
     global colour_choice
     global betamount
     global bank
@@ -73,40 +55,44 @@ def handle_turn():
     colour_choice = (input("Red(r), black(b), or green(g)? :"))
     print("€" + str(betamount) + " on " + colour_choice)
     time.sleep(0.5)
-    print(r.Roulette.is_even(x, 5))
-    #print(J.check_twelve())
-    #print(J.store_results(x, 5))
+"""
 
 def check_win():
     #check win (FOR COLOUR!)
-    global win_black
-    global win_red
-    global win_green
     global lose
+    global result
     #reset outcomes
     win_red = False
     win_green = False
     win_black = False
     lose = False
     #check colour against result 
-    if colour_choice == "r" and roll_result == "Red":
-        win_red = True
+    if result in r.red:
+        #win_red = True
         print("Red wins!")
-   
-    elif colour_choice == "b" and roll_result == "Black":
-        win_black = True
+    elif result in r.black:
+        #win_black = True
         print("Black wins!")
-    elif colour_choice == "g" and roll_result == "Green":
-        win_green = True
+    elif result in r.green:
+        #win_green = True
         print("Green wins!!")
-    else:
-        lose = True
-        print("You lose! €" + str(betamount))
+    
+    #else:
+    #    lose = True
+    #    print("You lose! €" + str(betamount))
 
 
-#intro()
-#display_table()
-#roll_ball()
+#store a number of spins in a list
+results = []
+for i in range(12):
+    print(r().spin_wheel())
+    print(check_win())
+"""
+intro()
+display_table()
+take_bets()
+roll_ball()
+print(spin1.get_colour())
 #handle_turn()
 #check_win()
 
@@ -116,7 +102,7 @@ win_red = False
 win_green = False
 win_black = False
 lose = False
-
+"""
 
     
 def check_if_broke():
