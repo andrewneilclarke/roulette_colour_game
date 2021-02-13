@@ -3,7 +3,6 @@ import time
 from roulette import Roulette as r
 
 bank = 0
-result = 0
 betamount = 0
 colour_choice = ""
 
@@ -17,19 +16,14 @@ def intro():
 def display_table():
     print("Roulette Table")
     print("Red: ")
-    print(r.red)
+    print(r1.red)
     print("Black:")
-    print(r.black)
+    print(r1.black)
     print("Green:")
-    print(r.green)
-
-def roll_ball():
-    global result
-    result = (r().spin_wheel())
-    print(result)
-    return result
+    print(r1.green)
     
 def take_bets():
+    # take bet on colour
     global colour_choice
     global betamount
     global bank
@@ -49,7 +43,6 @@ def take_bets():
     colour_choice = (input("Red(r), black(b), or green(g)? :"))
     print("€" + str(betamount) + " on " + colour_choice)
     time.sleep(0.5)
-"""
 
 def check_win():
     #check win (FOR COLOUR!)
@@ -61,40 +54,32 @@ def check_win():
     win_black = False
     lose = False
     #check colour against result 
-    if result in r.red:
-        #win_red = True
-        print("Red wins!")
-    elif result in r.black:
-        #win_black = True
-        print("Black wins!")
-    elif result in r.green:
-        #win_green = True
-        print("Green wins!!")
+    print(colour_choice.lower())
+    print(r1.colour.lower())
+    if colour_choice.lower() in r1.colour.lower():
+        win_red = True
+        print(r1.colour + " wins!")
+    else:
+        lose = True
+        print("You lose! €" + str(betamount))
     
-    #else:
-    #    lose = True
-    #    print("You lose! €" + str(betamount))
 
-
-#store a number of spins in a list
-results = []
-for i in range(12):
-    print(r().spin_wheel())
-    print(check_win())
-"""
-#intro()
-#display_table()
-#take_bets()
-#roll_ball()
-#print(spin1.get_colour())
-#handle_turn()
-#check_win()
 
 #create instances
 r1 = r()
 r2 = r()
 r3 = r()
 
+intro()
+display_table()
+take_bets()
+#print(spin1.get_colour())
+#handle_turn()
+check_win()
+
+
+
+"""
 print(r1.number)
 print(r1.colour)
 print(r1.is_even())
@@ -110,7 +95,7 @@ win_red = False
 win_green = False
 win_black = False
 lose = False
-"""
+
 
     
 def check_if_broke():
