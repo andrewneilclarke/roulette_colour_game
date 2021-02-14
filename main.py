@@ -6,12 +6,13 @@ bank = 0
 betamount = 0
 colour_choice = ""
 even_choice = ""
+twelve_choice = ""
+bet_type = None
 
 #welcome user
 def intro():
     global bank
     print('Welcome to Roulette! \n')
-    time.sleep(0.8)
     bank = int(input('Enter starting bankroll: '))
 
 def display_table():
@@ -27,45 +28,50 @@ def take_bet():
     # take bet on colour
     global colour_choice
     global even_choice
+    global twelve_choice
     global betamount
     global bank
+    global bet_type
     #reset variables
     betamount = 0
     colour_choice = ""
     even_choice = ""
-    while betamount == 0:
+    twelve_choice = ""
+    bet_type = None
+    while bet_type == None:
         #assign bet amount
         try:
             betamount = int(input(f"\nBet amount? (€" + str(bank) + " available)\n"))
         except ValueError:
                 print('\nYou did not enter a valid amount')
-    #prevent debt
-    if betamount > bank:
-        betamount = bank
-    
-    print("€" + str(betamount))
-    
-    bet_type = None
-    while bet_type == None:
-        try:
-            bet_type = (input("""What would you like to bet on?\n1. Red/Black\n2. Even/Odd\n3. First twelve, second twelve, third twelve
-                \nEnter a number """))
-        except ValueError:
-            print("\nYou did not enter a valid number")
+        #prevent debt
+        if betamount > bank:
+            betamount = bank
+        print("€" + str(betamount))
+        
+        while bet_type == None:
+            try:
+                bet_type = int(input("""What would you like to bet on?\n1. Red/Black\n2. Even/Odd\n3. First twelve, second twelve, third twelve
+                    \nEnter a number \n"""))
+            except ValueError:
+                print("\nYou did not enter a valid number")
+            
+        if bet_type != 1 or bet_type != 2 or bet_type != 3:
+            raise Exception("\nYou did not enter a valid number!".format())
         else:
-            if bet_type != '1':
-                raise Exception("\nYou did not enter a valid number!".format())
-            else:
-                #assign colour choice
-                if bet_type == 1:
-                    colour_choice = (input("Red(r), black(b), or green(g)? :"))
-                    print("€" + str(betamount) + " on " + colour_choice)
-                elif bet_type == 2:
-                    even_choice = (input("Odd(o)or Even(e)? :"))
-                    print("€" + str(betamount) + " on " + even_choice)
-                elif bet_type == 3:
-                    twelve_choice = (input("1st 12 (1), 2nd 12 (2) or 3rd 12 (3)? :"))
-                    print("€" + str(betamount) + " on " + twelve_choice)
+            #assign colour choice
+            if bet_type == 1:
+                print("RED  -- BLACK ")
+                colour_choice = (input("Red(r), black(b)? :"))
+                print("€" + str(betamount) + " on " + colour_choice)
+            elif bet_type == 2:
+                print("EVEN  -- ODD ")
+                even_choice = (input("Odd(o)or Even(e)? :"))
+                print("€" + str(betamount) + " on " + even_choice)
+            elif bet_type == 3:
+                print("1ST 12 -- 2ND 12 -- 3RD 12")
+                twelve_choice = (input("1st 12 (1), 2nd 12 (2) or 3rd 12 (3)? :"))
+                print("€" + str(betamount) + " on " + twelve_choice)
 
 def odd_even_bet():
     # take bet on colour
@@ -139,7 +145,6 @@ r3 = r()
 intro()
 display_table()
 take_bet()
-#print(spin1.get_colour())
 #handle_turn()
 check_win()
 
