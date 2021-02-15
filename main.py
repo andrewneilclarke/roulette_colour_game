@@ -77,6 +77,7 @@ def take_bet():
 
 def check_win():
     #check win (FOR COLOUR!)
+    global win
     global lose
     global result
     global bet_type
@@ -94,22 +95,47 @@ def check_win():
         if colour_choice.upper() in r1.colour:
             win = True
             print(r1.colour + " wins! You win €" + str(betamount * 2))
+        else:
+            lose = True
     elif bet_type == 2:
         if even_choice.upper() in r1.is_even:
             win = True
             print(even_choice + " wins! You win €" + str(betamount * 2))
+        else:
+            lose = True
     elif bet_type == 3:
         if twelve_choice.upper() in r1.check_twelve:
             print(twelve_choice)
             print(r.check_twelve)
+            win = True
     else:
         lose = True
+    if lose == True:
         print("You lose! €" + str(betamount))  
+
+
+def increment_bank():
+    global bank
+    if win == True:
+        bank = bank+(betamount * 2)
+    elif lose == True:
+        bank = bank - betamount
+    print(bank)
+
+def check_if_broke():
+    global broke
+    if bank < 1:
+        broke = True
+        print("Broke! Please leave!")
+
+print(r.spins)
 
 #create instances
 r1 = r()
 r2 = r()
 r3 = r()
+
+print(r.spins)
 
 #print(r.__dict__)
 #print(r1.check_colour())
@@ -124,42 +150,19 @@ intro()
 display_table()
 take_bet()
 check_win()
+increment_bank()
+check_if_broke()
 
 """
-print(r1.number)
-print(r1.colour)
-print(r1.is_even())
-print(r1.check_twelve())
-print(r.spins)
-
-print(r2.number)
-print(r2.colour)
-print(r2.check_twelve())
 
 game_still_going = True
 broke = False
-win_red = False
-win_green = False
-win_black = False
+win = False
 lose = False
 
 
-    
-def check_if_broke():
-    global broke
-    if bank < 1:
-        broke = True
-        print("Broke! Please leave!")
-    else:
-        pass
 
-def increment_bank():
-    global bank
-    if win == True:
-        bank = bank+(betamount * 2)
-    elif lose == True:
-        bank = bank - betamount
-    print(bank)
+
 
 
 def play_game():
