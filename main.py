@@ -18,11 +18,11 @@ def intro():
 def display_table():
     print("Roulette Table")
     print("Red: ")
-    print(r1.red)
+    print(r.red)
     print("Black:")
-    print(r1.black)
+    print(r.black)
     print("Green:")
-    print(r1.green)
+    print(r.green)
     
 def take_bet():
     # take bet on colour
@@ -38,7 +38,7 @@ def take_bet():
     even_choice = ""
     twelve_choice = ""
     bet_type = None
-    while bet_type == None:
+    while betamount == 0:
         #assign bet amount
         try:
             betamount = int(input(f"\nBet amount? (€" + str(bank) + " available)\n"))
@@ -49,16 +49,15 @@ def take_bet():
             betamount = bank
         print("€" + str(betamount))
         
-        while bet_type == None:
-            try:
-                bet_type = int(input("""What would you like to bet on?\n1. Red/Black\n2. Even/Odd\n3. First twelve, second twelve, third twelve
-                    \nEnter a number \n"""))
-            except ValueError:
-                print("\nYou did not enter a valid number")
-            
-        if bet_type != 1 or bet_type != 2 or bet_type != 3:
-            raise Exception("\nYou did not enter a valid number!".format())
-        else:
+    while bet_type == None:
+        #assign bet type
+        try:
+            bet_type = int(input("""What would you like to bet on?\n1. Red/Black\n2. Even/Odd\n3. First twelve, second twelve, third twelve
+                \nEnter a number \n"""))
+        except ValueError:
+            print("\nYou did not enter a valid number")
+        
+        if bet_type == 1 or bet_type == 2 or bet_type == 3:
             #assign colour choice
             if bet_type == 1:
                 print("RED  -- BLACK ")
@@ -71,90 +70,67 @@ def take_bet():
             elif bet_type == 3:
                 print("1ST 12 -- 2ND 12 -- 3RD 12")
                 twelve_choice = (input("1st 12 (1), 2nd 12 (2) or 3rd 12 (3)? :"))
-                print("€" + str(betamount) + " on " + twelve_choice)
+                print("€" + str(betamount) + " on " + twelve_choice) 
+        else:
+            raise Exception
 
-def odd_even_bet():
-    # take bet on colour
-    global colour_choice
-    global betamount
-    global bank
-    #reset betamount
-    betamount = 0
-    while betamount == 0:
-        #assign bet amount
-        try:
-            betamount = int(input(f"\nBet amount? (€" + str(bank) + " available)\n"))
-        except ValueError:
-                print('\nYou did not enter a valid amount')
-    #prevent debt
-    if betamount > bank:
-        betamount = bank
-    print("€" + str(betamount))
-    #assign colour choice
-    colour_choice = (input("Red(r), black(b), or green(g)? :"))
-    print("€" + str(betamount) + " on " + colour_choice)
-
-def twelve_bet():
-    # take bet on which twelve
-    global colour_choice
-    global betamount
-    global bank
-    #reset betamount
-    betamount = 0
-    while betamount == 0:
-        #assign bet amount
-        try:
-            betamount = int(input(f"\nBet amount? (€" + str(bank) + " available)\n"))
-        except ValueError:
-                print('\nYou did not enter a valid amount')
-    #prevent debt
-    if betamount > bank:
-        betamount = bank
-    print("€" + str(betamount))
-    #assign colour choice
-    colour_choice = (input("Red(r), black(b), or green(g)? :"))
-    print("€" + str(betamount) + " on " + colour_choice)
 
 def check_win():
     #check win (FOR COLOUR!)
     global lose
     global result
+    global bet_type
+    global colour_choice
+    global even_choice
+    global twelve_choice
     #reset outcomes
-    win_red = False
-    win_green = False
-    win_black = False
+    win = False
     lose = False
+    print(colour_choice.upper())
+    print(r1.colour)
     #check colour against result 
-    print(colour_choice.lower())
-    print(r1.colour.lower())
-    print(str(r1.number) + r1.colour)
-    if colour_choice.lower() in r1.colour.lower():
-        win_red = True
-        print(r1.colour + " wins!")
+    print("Result: " + str(r1.number) + " " + r1.colour)  
+    if bet_type == 1:  
+        if colour_choice.upper() in r1.colour:
+            win = True
+            print(r1.colour + " wins! You win €" + str(betamount * 2))
+    elif bet_type == 2:
+        if even_choice.upper() in r1.is_even:
+            win = True
+            print(even_choice + " wins! You win €" + str(betamount * 2))
+    elif bet_type == 3:
+        if twelve_choice.upper() in r1.check_twelve:
+            print(twelve_choice)
+            print(r.check_twelve)
     else:
         lose = True
-        print("You lose! €" + str(betamount))
-    
-
+        print("You lose! €" + str(betamount))  
 
 #create instances
 r1 = r()
 r2 = r()
 r3 = r()
 
+#print(r.__dict__)
+#print(r1.check_colour())
+#print(r.check_colour(r1))
+#print(colour_choice.lower())
+#print(r1.colour)
+#print(r1.check_twelve())
+#print(r1.is_even())
+#print(r.spins)
+
 intro()
 display_table()
 take_bet()
-#handle_turn()
 check_win()
-
-
 
 """
 print(r1.number)
 print(r1.colour)
 print(r1.is_even())
 print(r1.check_twelve())
+print(r.spins)
 
 print(r2.number)
 print(r2.colour)
@@ -179,19 +155,14 @@ def check_if_broke():
 
 def increment_bank():
     global bank
-    if win_red == True:
+    if win == True:
         bank = bank+(betamount * 2)
-    elif win_black == True:
-        bank = bank+(betamount * 2)
-    elif win_green == True:
-        bank = bank+(betamount * 35)
     elif lose == True:
         bank = bank - betamount
     print(bank)
 
 
 def play_game():
-    handle_turn()
     roll_ball()
     check_win()
     increment_bank()
