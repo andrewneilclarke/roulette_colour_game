@@ -52,7 +52,7 @@ def take_bet():
     while bet_type == None:
         #assign bet type
         try:
-            bet_type = int(input("""What would you like to bet on?\n1. Red/Black\n2. Even/Odd\n3. First twelve, second twelve, third twelve
+            bet_type = int(input("""What would you like to bet on?\n1. Red/Black\n2. Odd/Even\n3. First twelve, second twelve, third twelve
                 \nEnter a number \n"""))
         except ValueError:
             print("\nYou did not enter a valid number")
@@ -64,13 +64,18 @@ def take_bet():
                 colour_choice = (input("Red(r), black(b)? :"))
                 print("€" + str(betamount) + " on " + colour_choice)
             elif bet_type == 2:
-                print("EVEN  -- ODD ")
+                print("ODD  -- EVEN ")
                 even_choice = (input("Odd(o)or Even(e)? :"))
                 print("€" + str(betamount) + " on " + even_choice)
             elif bet_type == 3:
                 print("1ST 12 -- 2ND 12 -- 3RD 12")
                 twelve_choice = (input("1st 12 (1), 2nd 12 (2) or 3rd 12 (3)? :"))
-                print("€" + str(betamount) + " on " + twelve_choice) 
+                if int(twelve_choice) == 1:
+                    print("€" + str(betamount) + " on 1st 12")
+                elif int(twelve_choice) == 2:
+                    print("€" + str(betamount) + " on 2nd 12")
+                elif int(twelve_choice) == 3:
+                    print("€" + str(betamount) + " on 3rd 12")
         else:
             raise Exception
 
@@ -87,8 +92,6 @@ def check_win():
     #reset outcomes
     win = False
     lose = False
-    print(colour_choice.upper())
-    print(r1.colour)
     #check colour against result 
     print("Result: " + str(r1.number) + " " + r1.colour)  
     if bet_type == 1:  
@@ -98,29 +101,35 @@ def check_win():
         else:
             lose = True
     elif bet_type == 2:
-        if even_choice.upper() in r1.is_even:
+        if even_choice.upper() == "O" and r1.is_even() == False:
             win = True
-            print(even_choice + " wins! You win €" + str(betamount * 2))
+            print("Odd wins! You win €" + str(betamount * 2))
+        elif even_choice.upper() == "E" and r1.is_even() == True:
+            win = True
+            print("Even wins! You win €" + str(betamount * 2))
         else:
             lose = True
     elif bet_type == 3:
-        if twelve_choice.upper() in r1.check_twelve:
-            print(twelve_choice)
-            print(r.check_twelve)
+        print(r1.check_twelve() + "!")
+        if twelve_choice.upper() == 1 and r1.check_twelve() == "First 12":
             win = True
-    else:
-        lose = True
-    if lose == True:
-        print("You lose! €" + str(betamount))  
-
+        elif twelve_choice.upper() == 2 and r1.check_twelve() == "Second 12":
+            win = True
+        elif twelve_choice.upper() == 3 and r1.check_twelve() == "Third 12":
+            win = True
+        if win == True:
+            print("You win €" + str(betamount * 2))
+        else:
+            Lose = True
+            print("You lose! €" + str(betamount))
 
 def increment_bank():
     global bank
-    if win == True:
+    if win == True:    
         bank = bank+(betamount * 2)
-    elif lose == True:
+    elif lose == True:    
         bank = bank - betamount
-    print(bank)
+    print("Bank €" + str(bank))
 
 def check_if_broke():
     global broke
