@@ -96,8 +96,6 @@ def check_if_broke():
     if bank < 1:
         broke = True
         print("Broke! Please leave!")
-    else:
-        pass
 
 def increment_bank():
     global bank
