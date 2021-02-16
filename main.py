@@ -1,13 +1,16 @@
 import random
-import time
+import time as t
 from roulette import Roulette as r
 
+game_still_going = True
 bank = 0
 betamount = 0
+broke = False
 colour_choice = ""
 even_choice = ""
 twelve_choice = ""
 bet_type = None
+roll = ""
 
 #welcome user
 def intro():
@@ -25,7 +28,7 @@ def display_table():
     print(r.green)
     
 def take_bet():
-    # take bet on colour
+    # take bet amount and bet type
     global colour_choice
     global even_choice
     global twelve_choice
@@ -60,28 +63,32 @@ def take_bet():
         if bet_type == 1 or bet_type == 2 or bet_type == 3:
             #assign colour choice
             if bet_type == 1:
-                print("RED  -- BLACK ")
+                print("\nRED  -- BLACK ")
                 colour_choice = (input("Red(r), black(b)? :"))
-                print("€" + str(betamount) + " on " + colour_choice)
+                print("€" + str(betamount) + " on " + colour_choice + "...")
             elif bet_type == 2:
-                print("ODD  -- EVEN ")
+                print("\nODD  -- EVEN ")
                 even_choice = (input("Odd(o)or Even(e)? :"))
-                print("€" + str(betamount) + " on " + even_choice)
+                print("€" + str(betamount) + " on " + even_choice + "...")
             elif bet_type == 3:
-                print("1ST 12 -- 2ND 12 -- 3RD 12")
+                print("\n1ST 12 -- 2ND 12 -- 3RD 12")
                 twelve_choice = (input("1st 12 (1), 2nd 12 (2) or 3rd 12 (3)? :"))
                 if int(twelve_choice) == 1:
-                    print("€" + str(betamount) + " on 1st 12")
+                    print("€" + str(betamount) + " on 1st 12 ...")
                 elif int(twelve_choice) == 2:
-                    print("€" + str(betamount) + " on 2nd 12")
+                    print("€" + str(betamount) + " on 2nd 12 ...")
                 elif int(twelve_choice) == 3:
-                    print("€" + str(betamount) + " on 3rd 12")
+                    print("€" + str(betamount) + " on 3rd 12 ...")
         else:
             raise Exception
 
 
+def roll_ball():
+    global roll
+    roll = r()
+    t.sleep(2.0)
+
 def check_win():
-    #check win (FOR COLOUR!)
     global win
     global lose
     global result
@@ -93,42 +100,51 @@ def check_win():
     win = False
     lose = False
     #check colour against result 
-    print("Result: " + str(r1.number) + " " + r1.colour)  
+    print("Result: " + str(roll.number) + " " + roll.colour)
+    t.sleep(1)
     if bet_type == 1:  
-        if colour_choice.upper() in r1.colour:
+        if colour_choice.upper() in roll.colour:
             win = True
-            print(r1.colour + " wins! You win €" + str(betamount * 2))
+            print(roll.colour + " wins! You win €" + str(betamount * 2))
         else:
             lose = True
+            print("You lose! €" + str(betamount))
+    #check odd/even against result
     elif bet_type == 2:
-        if even_choice.upper() == "O" and r1.is_even() == False:
+        if even_choice.upper() == "O" and roll.is_even() == False:
             win = True
             print("Odd wins! You win €" + str(betamount * 2))
-        elif even_choice.upper() == "E" and r1.is_even() == True:
+        elif even_choice.upper() == "E" and roll.is_even() == True:
             win = True
             print("Even wins! You win €" + str(betamount * 2))
         else:
             lose = True
+            print("You lose! €" + str(betamount))
+    #check twelve against result
     elif bet_type == 3:
-        print(r1.check_twelve() + "!")
-        if twelve_choice.upper() == 1 and r1.check_twelve() == "First 12":
+        print(roll.check_twelve() + "!")
+        if twelve_choice.upper() == 1 and roll.check_twelve() == "First 12":
             win = True
-        elif twelve_choice.upper() == 2 and r1.check_twelve() == "Second 12":
+            print("You win €" + str(betamount * 3))
+        elif twelve_choice.upper() == 2 and roll.check_twelve() == "Second 12":
             win = True
-        elif twelve_choice.upper() == 3 and r1.check_twelve() == "Third 12":
+            print("You win €" + str(betamount * 3))
+        elif twelve_choice.upper() == 3 and roll.check_twelve() == "Third 12":
             win = True
-        if win == True:
-            print("You win €" + str(betamount * 2))
+            print("You win €" + str(betamount * 3))
         else:
-            Lose = True
+            lose = True
             print("You lose! €" + str(betamount))
 
 def increment_bank():
     global bank
-    if win == True:    
+    if win == True and bet_type == 3:    
+        bank = bank+(betamount * 3)
+    elif win == True:
         bank = bank+(betamount * 2)
     elif lose == True:    
         bank = bank - betamount
+    t.sleep(1)
     print("Bank €" + str(bank))
 
 def check_if_broke():
@@ -137,56 +153,20 @@ def check_if_broke():
         broke = True
         print("Broke! Please leave!")
 
-print(r.spins)
-
-#create instances
-r1 = r()
-r2 = r()
-r3 = r()
-
-print(r.spins)
-
-#print(r.__dict__)
-#print(r1.check_colour())
-#print(r.check_colour(r1))
-#print(colour_choice.lower())
-#print(r1.colour)
-#print(r1.check_twelve())
-#print(r1.is_even())
-#print(r.spins)
-
-intro()
-display_table()
-take_bet()
-check_win()
-increment_bank()
-check_if_broke()
-
-"""
-
-game_still_going = True
-broke = False
-win = False
-lose = False
-
-
-
-
-
 
 def play_game():
+    display_table()
+    take_bet()
     roll_ball()
     check_win()
     increment_bank()
     check_if_broke()
 
 intro()
-display_table()
 # loop main program until answer not "Y"
 while game_still_going:
     play_game()
     if broke == True:
-        break
+        break 
     if input("Continue? (y/n)").strip().upper() != 'Y':
         break
-"""
